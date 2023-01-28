@@ -1,7 +1,10 @@
 
 import React, {useEffect} from 'react';
+import {
+  View, Text
+} from 'react-native';
 import axios from 'axios';
-import LoginScreen from './src/screens/login/LoginScreen';
+
 
 
 const App = () => {  
@@ -20,7 +23,9 @@ const App = () => {
   
 
   return (
-    <LoginScreen/>
+    <View>
+      <Text>App js</Text>
+    </View>
   );
 };
 
