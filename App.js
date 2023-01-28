@@ -4,6 +4,7 @@ import {
   View, Text
 } from 'react-native';
 import axios from 'axios';
+import LoginScreen from './src/screens/login/LoginScreen';
 
 
 
@@ -23,9 +24,9 @@ const App = () => {
   
 
   return (
-    <View>
-      <Text>App js</Text>
-    </View>
+    
+      <LoginScreen/>
+    
   );
 };
 
