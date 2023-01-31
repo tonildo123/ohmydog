@@ -13,7 +13,7 @@ const width_logo = width * 0.8;
 export const LoginScreenStyle = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'#0E6251'
+        backgroundColor:'#BA4A00'
     },
     header: {
         flex: 2,
@@ -34,6 +34,7 @@ export const LoginScreenStyle = StyleSheet.create({
         height: height_logo,
         resizeMode: 'contain',
         alignSelf: 'center',
+        
     },
     text_header: {
         color: 'white',

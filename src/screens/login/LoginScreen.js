@@ -1,16 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View, Text
   , StatusBar
   , ScrollView
   , TextInput
-  , TouchableOpacity
+  , TouchableOpacity,
+  Alert
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { LoginScreenStyle } from '../../styles/loginStyle/LoginScreenStyle';
+import NetInfo from "@react-native-community/netinfo";
+import axios from 'axios';
 
 
 const LoginScreen = () => {  
@@ -23,17 +27,79 @@ const LoginScreen = () => {
   const [loadingData, setLoadingData] = useState(false);
   const [hayInternet, setHayInternet] = useState(false);
 
-  const handleLogin =()=>{
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+        console.log("Connection type", state.type);
+        console.log("Is connected?", state.isConnected);
+        setHayInternet(state.isConnected)
+      });
+      
+      // Unsubscribe
+      unsubscribe();
+  }, [])
+  
+
+  const handleLogin = () =>{
+
+
+    const body = {
+        email: text,
+        password: number
+    }
+
+    console.log('body',JSON.stringify(body, null, 4))
     
-  }
+        axios.post('https://be-production-3d6c.up.railway.app/api/login', body)
+        .then((resp)=>{
+        console.log('datos', JSON.stringify(resp.data.data, null, 4))
+        })
+        .catch(
+        (err)=>{
+            console.log('error en la solicitud',err)
+        }
+        )
+
+}
   
   return (
     <View style={LoginScreenStyle.container}>
-        <StatusBar backgroundColor='#000000' barStyle="light-content" />
+        <StatusBar backgroundColor='#BA4A00' barStyle="light-content" />
         <View style={LoginScreenStyle.header}>
-            <Text style={LoginScreenStyle.text_header}>Bienvenido</Text>         
-            <Text style={LoginScreenStyle.text_header}>a TuMascota</Text>
+        <View
+        style={{
+            flexDirection: 'row',
+        }}
+        >
+            <View
+            style={{
+                width:'80%'
+            }}
+            >
+                <Text style={LoginScreenStyle.text_header}>Bienvenido</Text>         
+                <Text style={LoginScreenStyle.text_header}>a TuMascota</Text>
+            </View>
+            <View
+            style={{
+                width:'20%'
+            }}
+            >
+              {/* <Animatable.Image
+              animation="bounceIn"
+              duraton="1500"
+              source = {require('../../assets/images/h6.jpg')}
+              style={LoginScreenStyle.logo}
+              resizeMode="stretch"
+            /> */}
+            <MaterialIcons
+                name="pets"
+                color='white'
+                size={80}
+                />
+            </View>
         </View>
+        
+        </View>
+        
         <Animatable.View
             animation="fadeInUpBig"
             style={[LoginScreenStyle.footer, {
@@ -143,7 +209,7 @@ style={{flexDirection:'row',justifyContent:'space-evenly'}}
         
     >
         <LinearGradient
-            colors={['#0E6251', '#28B463']}
+            colors={['#BA4A00', '#E67E22']}
             style={LoginScreenStyle.signIn}
         >
             {loadingData
@@ -156,14 +222,40 @@ style={{flexDirection:'row',justifyContent:'space-evenly'}}
         </LinearGradient>
 
     </TouchableOpacity>
+    
 
-</View>
-
-        </ScrollView>
-         </Animatable.View>
+    </View>
+    <View
+    style={{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginTop: 30
+    }}
+    >
+        <MaterialIcons
+            name="apps"
+            color='grey'
+            size={50}
+        />
+        
+        <MaterialIcons
+            name="fingerprint"
+            color='grey'
+            size={50}
+        />
+       
+        <Feather
+            name="camera"
+            color="gray"
+            size={50}
+        /> 
+    </View>
+    </ScrollView>
+    </Animatable.View>
 
         
-    </View>
+</View>
   )
 }
 
