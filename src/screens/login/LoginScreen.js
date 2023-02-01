@@ -5,7 +5,8 @@ import {
   , ScrollView
   , TextInput
   , TouchableOpacity,
-  Alert
+  Alert, 
+  ActivityIndicator
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
@@ -17,7 +18,7 @@ import NetInfo from "@react-native-community/netinfo";
 import axios from 'axios';
 
 
-const LoginScreen = () => {  
+const LoginScreen = ({navigation}) => {  
 
   const [text, onChangeText] = useState("");
   const [number, onChangeNumber] = useState('');
@@ -41,6 +42,7 @@ const LoginScreen = () => {
 
   const handleLogin = () =>{
 
+    setLoadingData(true)
 
     const body = {
         email: text,
@@ -51,14 +53,23 @@ const LoginScreen = () => {
     
         axios.post('https://be-production-3d6c.up.railway.app/api/login', body)
         .then((resp)=>{
-        console.log('datos', JSON.stringify(resp.data.data, null, 4))
+            console.log('datos', JSON.stringify(resp.data.data, null, 4))
+            setLoadingData(false)
+            Alert.alert('usuario logueado ')
         })
         .catch(
         (err)=>{
             console.log('error en la solicitud',err)
+            setLoadingData(false)
+            Alert.alert('error en el login')
         }
         )
 
+}
+
+
+const handleRegister = ()=>{
+    navigation.navigate('Register')
 }
   
   return (

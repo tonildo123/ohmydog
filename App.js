@@ -1,19 +1,13 @@
 
 import React from 'react';
-
-import LoginScreen from './src/screens/login/LoginScreen';
-
+import Navigation from './src/navigation/Navigation';
 
 
 const App = () => {  
-
-  
   
 
   return (
-    
-      <LoginScreen/>
-    
+      <Navigation/>
   );
 };
 
