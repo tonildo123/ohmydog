@@ -18,7 +18,11 @@ import NetInfo from "@react-native-community/netinfo";
 import axios from 'axios';
 
 
+
+
 const LoginScreen = ({navigation}) => {  
+  
+    
 
   const [text, onChangeText] = useState("");
   const [number, onChangeNumber] = useState('');
@@ -56,6 +60,12 @@ const LoginScreen = ({navigation}) => {
             console.log('datos', JSON.stringify(resp.data.data, null, 4))
             setLoadingData(false)
             Alert.alert('usuario logueado ')
+                navigation.navigate('Home')
+            
+            
+            // setEmail(resp.data.data.email)
+            // setPassword(resp.data.data.password)
+            // setId(resp.data.data._id)
         })
         .catch(
         (err)=>{
