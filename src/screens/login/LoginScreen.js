@@ -82,7 +82,10 @@ const LoginScreen = ({ navigation }) => {
 
 
     const handleRegister = () => {
-        props.navigation.navigate('Register')
+        navigation.navigate('Register')
+    }
+    const handleUnforgotPass = () => {
+        navigation.navigate('Recupero')
     }
 
     return (
@@ -107,13 +110,6 @@ const LoginScreen = ({ navigation }) => {
                             width: '20%'
                         }}
                     >
-                        {/* <Animatable.Image
-              animation="bounceIn"
-              duraton="1500"
-              source = {require('../../assets/images/h6.jpg')}
-              style={LoginScreenStyle.logo}
-              resizeMode="stretch"
-            /> */}
                         <MaterialIcons
                             name="pets"
                             color='white'
@@ -199,8 +195,7 @@ const LoginScreen = ({ navigation }) => {
                     >
                         <TouchableOpacity
                             onPress={() => {
-                                // navigation.navigate('recuperarPassword') 
-                                Alert.alert('Seccion en mantenimiento!');
+                                handleUnforgotPass();
                             }}>
                             <Text style={{
                                 color: 'red',

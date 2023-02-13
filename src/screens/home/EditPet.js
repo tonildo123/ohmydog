@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const SplashScreen = () => {
+const EditPet = () => {
   return (
     <View>
-      <Text>SplashScreen</Text>
+      <Text>EditPet</Text>
     </View>
   )
 }
 
-export default SplashScreen
+export default EditPet
